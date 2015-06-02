@@ -39,3 +39,9 @@ bool Demander::changeCurrentDemand(int subValue)
 		return true;
 	}
 }
+
+
+void Demander::showDemander()
+{
+	std::cout << "Demander, init demand: " << returnInitDemand() << " current demand: " << returnCurrentDemand() << std::endl;
+}

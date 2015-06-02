@@ -10,6 +10,18 @@
       <Platform>Win32</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\inc\demander.h" />
+    <ClInclude Include="..\inc\iTransportProblem.hh" />
+    <ClInclude Include="..\inc\supplier.h" />
+    <ClInclude Include="TransportProblem.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\demander.cpp" />
+    <ClCompile Include="..\src\supplier.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="TransportProblem.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{076685AB-164A-4A79-951B-45D65F78C029}</ProjectGuid>
     <RootNamespace>TransportationProblem</RootNamespace>
@@ -44,6 +56,7 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>C:\Users\Daniel\Desktop\TransportationProblem\inc;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -63,14 +76,6 @@
       <OptimizeReferences>true</OptimizeReferences>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="demander.h" />
-    <ClInclude Include="supplier.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="demander.cpp" />
-    <ClCompile Include="supplier.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

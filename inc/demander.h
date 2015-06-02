@@ -19,5 +19,6 @@ public:
 	int returnInitDemand();
 	int returnCurrentDemand();
 	bool changeCurrentDemand(int subValue);
+	void showDemander();
 };
 #endif
