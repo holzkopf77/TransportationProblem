@@ -1,13 +1,13 @@
-#ifndef TRANSPORTPROBLEM_H
-#define TRANSPORTPROBLEM_H
+#ifndef TRANSPORTPROBLEM_HH
+#define TRANSPORTPROBLEM_HH
 
 #include <vector>
 #include <ctime>
 #include <cassert>
 
 #include "iTransportProblem.hh"
-#include "demander.h"
-#include "supplier.h"
+#include "demander.hh"
+#include "supplier.hh"
 
 /*!
 	\class TransportProblem
@@ -29,7 +29,7 @@ private:
 	int** operationTable;
 public:
 	//void upLeftCorner();
-	//void minimalElement();
+	void minimalElement();
 	int returnNumberOfDemanders();
 	int returnNumberOfSuppliers();
 	//displaying

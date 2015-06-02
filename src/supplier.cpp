@@ -1,4 +1,4 @@
-#include "supplier.h"
+#include "supplier.hh"
 
 Supplier::Supplier()
 {

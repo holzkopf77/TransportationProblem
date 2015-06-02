@@ -1,5 +1,5 @@
-#ifndef SUPLIER_H
-#define SUPLIER_H
+#ifndef SUPLIER_HH
+#define SUPLIER_HH
 
 #include <iostream>
 

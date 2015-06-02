@@ -1,5 +1,5 @@
-#ifndef DEMANDER_H
-#define DEMANDER_H
+#ifndef DEMANDER_HH
+#define DEMANDER_HH
 
 #include <iostream>
 
