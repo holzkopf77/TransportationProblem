@@ -15,18 +15,30 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="supplier.h">
+    <ClInclude Include="..\inc\demander.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="demander.h">
+    <ClInclude Include="..\inc\supplier.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\iTransportProblem.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TransportProblem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="supplier.cpp">
+    <ClCompile Include="..\src\demander.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="demander.cpp">
+    <ClCompile Include="..\src\supplier.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TransportProblem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

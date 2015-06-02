@@ -39,3 +39,8 @@ bool Supplier::changeCurrentSupply(int subValue)
 		return true;
 	}
 }
+
+void Supplier::showSupplier()
+{
+	std::cout << "Supplier, init supply: " << returnInitSupply() << " current demand: " << returnCurrentSupply() << std::endl;
+}

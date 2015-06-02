@@ -19,5 +19,6 @@ public:
 	int returnInitSupply();
 	int returnCurrentSupply();
 	bool changeCurrentSupply(int subValue);
+	void showSupplier();
 };
 #endif
