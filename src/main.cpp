@@ -6,10 +6,11 @@
 using namespace std;
 int main()
 {
-	TransportProblem newProblem(5, 5, 100, 10);
+	TransportProblem newProblem(5, 4, 100, 10);
 	newProblem.showOperationTable();
 	newProblem.showTransportCostTable();
 	newProblem.minimalElement();
 	newProblem.showOperationTable();
+	newProblem.degenerateSolution();
 	newProblem.showWorkers();
 }

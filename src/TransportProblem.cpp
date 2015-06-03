@@ -253,3 +253,16 @@ int TransportProblem::minimalElementInMatrix(int **tab)
   return index;
 }
 
+ bool TransportProblem::degenerateSolution()
+ {
+   int BasisElements=0;
+   for(unsigned int i=0;i<listOfSuppliers.size();++i)
+     for(unsigned int j=0;j<listOfDemanders.size();++j)
+       if(operationTable[i][j])BasisElements+=1;
+   if(BasisElements!=(numberOfDemanders+numberOfSuppliers-1))
+     {
+       std::cout<<"Rozwiazanie niezdegenerowane"<<std::endl;
+       return false;
+     }
+   return true;
+ }

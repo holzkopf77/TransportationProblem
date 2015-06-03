@@ -33,6 +33,7 @@ public:
   //void upLeftCorner();
   void minimalElement();
   int minimalElementInMatrix(int **tab);
+  bool degenerateSolution();
   int returnNumberOfDemanders();
   int returnNumberOfSuppliers();
   //displaying
