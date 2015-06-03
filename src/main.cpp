@@ -8,6 +8,11 @@ int main()
 	newProblem.showOperationTable();
 	newProblem.showTransportCostTable();
 	newProblem.showWorkers();
+
+	newProblem.upLeftCorner();
+	newProblem.showOperationTable();
+	newProblem.showTransportCostTable();
+	newProblem.showWorkers();
 	system("pause");
 
 }

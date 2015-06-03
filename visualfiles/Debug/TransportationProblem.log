@@ -1,18 +1,17 @@
-﻿Build started 2015-06-02 22:13:39.
+﻿Build started 2015-06-03 00:32:43.
      1>Project "C:\Users\Daniel\Desktop\TransportationProblem\visualfiles\TransportationProblem.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         E:\Programy\VisualStudio\VC\bin\CL.exe /c /IC:\Users\Daniel\Desktop\TransportationProblem\inc /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt TransportProblem.cpp
+         E:\Programy\VisualStudio\VC\bin\CL.exe /c /IC:\Users\Daniel\Desktop\TransportationProblem\inc /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt ..\src\TransportProblem.cpp
          TransportProblem.cpp
-     1>c:\users\daniel\desktop\transportationproblem\visualfiles\transportproblem.cpp(17): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-     1>c:\users\daniel\desktop\transportationproblem\visualfiles\transportproblem.cpp(15): warning C4101: 'tempValue' : unreferenced local variable
+     1>c:\users\daniel\desktop\transportationproblem\src\transportproblem.cpp(16): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
        Link:
          E:\Programy\VisualStudio\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Daniel\Desktop\TransportationProblem\visualfiles\Debug\TransportationProblem.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Daniel\Desktop\TransportationProblem\visualfiles\Debug\TransportationProblem.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Daniel\Desktop\TransportationProblem\visualfiles\Debug\TransportationProblem.lib" /MACHINE:X86 Debug\demander.obj
-         Debug\supplier.obj
          Debug\main.obj
+         Debug\supplier.obj
          Debug\TransportProblem.obj
          TransportationProblem.vcxproj -> C:\Users\Daniel\Desktop\TransportationProblem\visualfiles\Debug\TransportationProblem.exe
      1>Done Building Project "C:\Users\Daniel\Desktop\TransportationProblem\visualfiles\TransportationProblem.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:05.07
+Time Elapsed 00:00:02.31

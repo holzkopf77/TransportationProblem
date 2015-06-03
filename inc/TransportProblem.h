@@ -13,8 +13,8 @@
 	\class TransportProblem
 	\brief Main class for describing the transport problem.
 */
-class TransportProblem 
-	//public iTransportProblem<int>
+class TransportProblem:
+	public iTransportProblem<int>
 {
 public:
 	TransportProblem();
@@ -28,8 +28,7 @@ private:
 	int** transportCostTable;
 	int** operationTable;
 public:
-	//void upLeftCorner();
-	//void minimalElement();
+	void upLeftCorner();
 	int returnNumberOfDemanders();
 	int returnNumberOfSuppliers();
 	//displaying

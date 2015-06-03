@@ -5,6 +5,5 @@ class iTransportProblem
 {
 public:
   virtual void upLeftCorner()=0;
-  virtual void minimalElement()=0;
 };
 #endif

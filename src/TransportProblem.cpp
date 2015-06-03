@@ -189,3 +189,37 @@ void TransportProblem::showWorkers()
 	for (auto i : listOfSuppliers)
 		i.showSupplier();
 }
+
+void TransportProblem::upLeftCorner()
+{
+	for (int i = 0; i < returnNumberOfSuppliers(); )
+	{
+		for (int j = 0; j < returnNumberOfDemanders(); )
+		{
+			if (listOfSuppliers[i].returnCurrentSupply() >= listOfDemanders[j].returnCurrentDemand())
+			{
+				operationTable[i][j] = listOfDemanders[j].returnCurrentDemand();
+				listOfSuppliers[i].changeCurrentSupply(-listOfDemanders[j].returnCurrentDemand());
+				listOfDemanders[j].changeCurrentDemand(-listOfDemanders[j].returnCurrentDemand());
+				j++;
+			}
+			else if (listOfSuppliers[i].returnCurrentSupply() < listOfDemanders[j].returnCurrentDemand())
+			{
+				if (listOfSuppliers[i].returnCurrentSupply() == 0)
+				{
+					i++;
+				}
+				else
+				{
+					operationTable[i][j] = listOfSuppliers[i].returnCurrentSupply();
+					listOfSuppliers[i].changeCurrentSupply(-listOfSuppliers[i].returnCurrentSupply());
+					listOfDemanders[j].changeCurrentDemand(-listOfSuppliers[i].returnCurrentSupply());
+					i++;
+				}
+			else
+
+			}
+		}
+	
+	}
+}
