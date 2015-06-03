@@ -27,12 +27,12 @@ private:
   std::vector<Supplier> listOfSuppliers;
   int** transportCostTable;
   int** operationTable;
-
-  //  int minimalRow(int j);
+ 
+ //  int minimalRow(int j);
 public:
   //void upLeftCorner();
   void minimalElement();
-  int minimalRow(int j);
+  int minimalElementInMatrix(int **tab);
   int returnNumberOfDemanders();
   int returnNumberOfSuppliers();
   //displaying

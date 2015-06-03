@@ -192,70 +192,64 @@ void TransportProblem::showWorkers()
 
 void TransportProblem::minimalElement()
 {
-  int visitedElement[numberOfSuppliers][numberOfDemanders];
+  int **visitedElement=new int*[numberOfSuppliers];
+  for(int i=0;i<numberOfSuppliers;++i)visitedElement[i]=new int[numberOfDemanders];
   int allDemand=0;
-  int demand=0;//index of column
   int minusCostValue=0;
+  int index=0;
+  int s=0,d=0;
 
-  for(auto i=0;i<numberOfSuppliers;++i)
-    for(auto j=0;j<numberOfDemanders;++j)
+  for(int i=0;i<numberOfSuppliers;++i)
+    for(int j=0;j<numberOfDemanders;++j)
       visitedElement[i][j]=0;
 
-  for(auto i=0;i<listOfDemanders.size();++i)
+  for(unsigned int i=0;i<listOfDemanders.size();++i)
     allDemand+=listOfDemanders[i].returnInitDemand();
 
-  // for(int column=0,row=0;allDemand;++row)
-  //   {
-  //     //column=minimalMatrix;
-  //   }
-  // for(int supply=0;supply<listOfSuppliers.size();++supply)
-  //   {
-  //     demand=minimalRow(supply);
-  //     visitedElement[supply][demand]=true;
-  //     if(listOfSuppliers[supply].returnCurrentSupply()>listOfDemanders[demand].returnCurrentDemand())
-  // 	{
-  // 	  minusCostValue=listOfDemanders[demand].returnCurrentDemand;
-  // 	  //SupplyZero=false;
-  // 	}
-  //     else 
-  // 	{
-  // 	  minusCostValue=listOfSuppliers[indexMinimum].returnCurrentSupply;
-  // 	  //Supply=true;
-  // 	}
-  //     listOfSuppliers[indexMinimum].changeCurrentSupply(-minusCostValue);
-  //     listOfDemanders[row].changeCurrentDemand(-minusCostValue);
-      
-  //     operationTable[supply][demand]=minusCostValue;
-  //     visitedElement[supply][demand]=true;
-  //     //Zero rest of this column
-  //     if(listOfSuppliers[indexMinimum].returnCurrentSupply()==0)
-  // 	for(int j=demand+1;j<listOfDemanders.size();++j){
-  // 	  operationTable[supply][j]=0;
-  // 	  visitedElement[supply][j]=true;
-  // 	}
-  //     else if(listOfDemanders[row].returnCurrentDemand()==0)
-  // 	for(int a=0;demand+1;a<listOfSuppliers.size();++a)
-  // 	  {
-  // 	    operationTable[supply][j]=0;
-  // 	    visitedElement[supply][j]=true;
-  // 	  }
-
-  //   }
- 
+  while(allDemand)
+    {
+      //assignment to x and y specific value index in 2D matrix from 1D
+      index=minimalElementInMatrix(visitedElement);
+      s=index/listOfDemanders.size();
+      d=index%listOfDemanders.size();
+      if(listOfDemanders[d].returnCurrentDemand()<listOfSuppliers[s].returnCurrentSupply())
+	{
+	  minusCostValue=listOfDemanders[d].returnCurrentDemand();
+	  operationTable[s][d]=minusCostValue;
+	  allDemand-=minusCostValue;
+	  listOfDemanders[d].changeCurrentDemand(-minusCostValue);
+	  listOfSuppliers[s].changeCurrentSupply(-minusCostValue);
+	}
+      else 
+	{
+	  minusCostValue=listOfSuppliers[s].returnCurrentSupply();
+	  operationTable[s][d]=minusCostValue;
+	  allDemand-=minusCostValue;
+	  listOfDemanders[d].changeCurrentDemand(-minusCostValue);
+	  listOfSuppliers[s].changeCurrentSupply(-minusCostValue);
+	}
+      if(!listOfDemanders[d].returnCurrentDemand())
+	for(unsigned int i=0;i<listOfSuppliers.size();++i)visitedElement[i][d]=1;
+      if(!listOfSuppliers[s].returnCurrentSupply())
+	for(unsigned int i=0;i<listOfDemanders.size();++i)visitedElement[s][i]=1;
+    }
+  for(int i=0;i<numberOfSuppliers;++i)delete [] visitedElement[i];
+  delete visitedElement;
 }
 
-int TransportProblem::minimalRow(int j)
+int TransportProblem::minimalElementInMatrix(int **tab)
 {
   int MinimalValueCostTable=1000;
   int index=0;
-  for(auto i=0;i<listOfDemanders.size();++i)
-    for(auto j=0;j<listOfSuppliers.size();++j)
-      if(MinimalValueCostTable>transportCostTable[i][j]){
-	MinimalValueCostTable=transportCostTable[i][j];
-	index=(i+1)*listOfSuppliers.size();
+  for(unsigned int i=0;i<listOfSuppliers.size();++i)
+    for(unsigned int  j=0;j<listOfDemanders.size();++j)
+      {
+	if(tab[i][j])continue;
+	if(MinimalValueCostTable>transportCostTable[i][j]){
+	  MinimalValueCostTable=transportCostTable[i][j];
+	  index=i*listOfDemanders.size()+j;
+	}
       }
   return index;
 }
-
-
 
