@@ -1,4 +1,4 @@
-#include "TransportProblem.h"
+#include "TransportProblem.hh"
 
 
 TransportProblem::TransportProblem()
@@ -32,6 +32,10 @@ TransportProblem::TransportProblem(int nrDemanders, int nrSuppliers,int totalDem
 	for (int i = 0; i < numberOfSuppliers; i++)
 		suppliesToAssing.push_back(0);
 	
+	for (int i = 0; i < numberOfDemanders; i++)
+		potencialsU.push_back(0);
+	for (int i = 0; i < numberOfSuppliers; i++)
+		potencialsV.push_back(0);
 
 	while (totalDemand > 0)
 	{
@@ -179,6 +183,16 @@ void TransportProblem::showOperationTable()
 	}
 }
 
+void TransportProblem::showPotencials()
+{
+	std::cout << "Potencials table:" << std::endl;
+	for (auto V : potencialsV)
+		std::cout <<"   "<< V << " ";
+	std::cout << std::endl;
+	for (auto U : potencialsU)
+		std::cout << U << std::endl;
+}
+
 
 void TransportProblem::showWorkers()
 {
@@ -190,36 +204,132 @@ void TransportProblem::showWorkers()
 		i.showSupplier();
 }
 
-void TransportProblem::upLeftCorner()
+void TransportProblem::minimalElement()
 {
-	for (int i = 0; i < returnNumberOfSuppliers(); )
-	{
-		for (int j = 0; j < returnNumberOfDemanders(); )
-		{
-			if (listOfSuppliers[i].returnCurrentSupply() >= listOfDemanders[j].returnCurrentDemand())
-			{
-				operationTable[i][j] = listOfDemanders[j].returnCurrentDemand();
-				listOfSuppliers[i].changeCurrentSupply(-listOfDemanders[j].returnCurrentDemand());
-				listOfDemanders[j].changeCurrentDemand(-listOfDemanders[j].returnCurrentDemand());
-				j++;
-			}
-			else if (listOfSuppliers[i].returnCurrentSupply() < listOfDemanders[j].returnCurrentDemand())
-			{
-				if (listOfSuppliers[i].returnCurrentSupply() == 0)
-				{
-					i++;
-				}
-				else
-				{
-					operationTable[i][j] = listOfSuppliers[i].returnCurrentSupply();
-					listOfSuppliers[i].changeCurrentSupply(-listOfSuppliers[i].returnCurrentSupply());
-					listOfDemanders[j].changeCurrentDemand(-listOfSuppliers[i].returnCurrentSupply());
-					i++;
-				}
-			else
+  int **visitedElement=new int*[numberOfSuppliers];
+  for(int i=0;i<numberOfSuppliers;++i)visitedElement[i]=new int[numberOfDemanders];
+  int allDemand=0;
+  int minusCostValue=0;
+  int index=0;
+  int s=0,d=0;
 
-			}
-		}
-	
+  for(int i=0;i<numberOfSuppliers;++i)
+    for(int j=0;j<numberOfDemanders;++j)
+      visitedElement[i][j]=0;
+
+  for(unsigned int i=0;i<listOfDemanders.size();++i)
+    allDemand+=listOfDemanders[i].returnInitDemand();
+
+  while(allDemand)
+    {
+      //assignment to x and y specific value index in 2D matrix from 1D
+      index=minimalElementInMatrix(visitedElement);
+      s=index/listOfDemanders.size();
+      d=index%listOfDemanders.size();
+      if(listOfDemanders[d].returnCurrentDemand()<listOfSuppliers[s].returnCurrentSupply())
+	{
+	  minusCostValue=listOfDemanders[d].returnCurrentDemand();
+	  operationTable[s][d]=minusCostValue;
+	  allDemand-=minusCostValue;
+	  listOfDemanders[d].changeCurrentDemand(-minusCostValue);
+	  listOfSuppliers[s].changeCurrentSupply(-minusCostValue);
 	}
+      else 
+	{
+	  minusCostValue=listOfSuppliers[s].returnCurrentSupply();
+	  operationTable[s][d]=minusCostValue;
+	  allDemand-=minusCostValue;
+	  listOfDemanders[d].changeCurrentDemand(-minusCostValue);
+	  listOfSuppliers[s].changeCurrentSupply(-minusCostValue);
+	}
+      if(!listOfDemanders[d].returnCurrentDemand())
+	for(unsigned int i=0;i<listOfSuppliers.size();++i)visitedElement[i][d]=1;
+      if(!listOfSuppliers[s].returnCurrentSupply())
+	for(unsigned int i=0;i<listOfDemanders.size();++i)visitedElement[s][i]=1;
+    }
+  for(int i=0;i<numberOfSuppliers;++i)delete [] visitedElement[i];
+  delete visitedElement;
 }
+
+int TransportProblem::minimalElementInMatrix(int **tab)
+{
+  int MinimalValueCostTable=1000;
+  int index=0;
+  for(unsigned int i=0;i<listOfSuppliers.size();++i)
+    for(unsigned int  j=0;j<listOfDemanders.size();++j)
+      {
+	if(tab[i][j])continue;
+	if(MinimalValueCostTable>transportCostTable[i][j]){
+	  MinimalValueCostTable=transportCostTable[i][j];
+	  index=i*listOfDemanders.size()+j;
+	}
+      }
+  return index;
+}
+
+ bool TransportProblem::degenerateSolution()
+ {
+   int BasisElements=0;
+   for(unsigned int i=0;i<listOfSuppliers.size();++i)
+     for(unsigned int j=0;j<listOfDemanders.size();++j)
+       if(operationTable[i][j])BasisElements+=1;
+   if(BasisElements!=(numberOfDemanders+numberOfSuppliers-1))
+     {
+       std::cout<<"Rozwiazanie niezdegenerowane"<<std::endl;
+       return false;
+     }
+   return true;
+ }
+
+ void TransportProblem::ePerturbation()
+ {
+	 //for n - 1 demanders add small numeber eta
+	 int i = 0;
+	 for (i = 0; i < listOfDemanders.size(); i++)
+	 {
+		 listOfDemanders[i].changeInitDemand(0.000000001);
+	 }
+	 //for the last supplier add small number eta * number of demanders
+	 listOfSuppliers[i].changeInitSupply(000000001 * returnNumberOfDemanders());
+ }
+
+ bool TransportProblem::checkPotencials()
+ {
+	 //temporary table for checking potencials (memory allocation)
+	 int** tempPotencialsTable = new int*[numberOfSuppliers];
+	 for (int i = 0; i < numberOfSuppliers; i++)
+	 {
+		 tempPotencialsTable[i] = new int[numberOfDemanders];
+	 }
+	 
+	 //assign 0 to all poles
+	 for (int i = 0; i < numberOfSuppliers; i++)
+		 for (int j = 0; j < numberOfDemanders; j++)
+			 tempPotencialsTable[i][j] = 0;
+
+	 //assign correct value inside the potencials table;
+	 for (int i = 0; i < numberOfSuppliers; i++)
+	 {
+		 for (int j = 0; j < numberOfDemanders; j++)
+		 {
+			 if (operationTable[i][j] != 0)
+				 tempPotencialsTable[i][j] = transportCostTable[i][j];
+		 }
+	 }
+
+	 //find potencials
+	 // check signs
+
+	 /*show TEMPORARY TABLE*/
+	 /*
+	 for (int i = 0; i < numberOfSuppliers; i++)
+	 {
+		 std::cout << std::endl;
+		 for (int j = 0; j < numberOfDemanders; j++)
+		 {
+			 std::cout << tempPotencialsTable[i][j] <<" ";
+		 }
+	 }
+	 */
+	 return true;
+ }

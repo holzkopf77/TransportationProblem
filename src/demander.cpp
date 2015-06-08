@@ -1,4 +1,4 @@
-#include "demander.h"
+#include "demander.hh"
 
 Demander::Demander()
 {
@@ -7,26 +7,26 @@ Demander::Demander()
 }
 
 
-Demander::Demander(int demandValue)
+Demander::Demander(long double demandValue)
 {
 	currentDemand = demandValue;
 	initDemand = demandValue;
 }
 
 
-int Demander::returnCurrentDemand()
+long double Demander::returnCurrentDemand()
 {
 	return currentDemand;
 }
 
 
-int Demander::returnInitDemand()
+long double Demander::returnInitDemand()
 {
 	return initDemand;
 }
 
 
-bool Demander::changeCurrentDemand(int subValue)
+bool Demander::changeCurrentDemand(long double subValue)
 {
 	if (currentDemand <= 0)
 	{
@@ -40,6 +40,19 @@ bool Demander::changeCurrentDemand(int subValue)
 	}
 }
 
+bool Demander::changeInitDemand(long double subValue)
+{
+	if ( subValue < 0)
+	{
+		std::cout << "Init demand is smaller than 0" << std::endl;
+		return false;
+	}
+	else
+	{
+		initDemand += subValue;
+		return true;
+	}
+}
 
 void Demander::showDemander()
 {

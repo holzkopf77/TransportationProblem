@@ -1,18 +1,26 @@
-#include "demander.h"
-#include "supplier.h"
-#include "TransportProblem.h"
+#include <iostream>
+#include "demander.hh"
+#include "supplier.hh"
+#include "TransportProblem.hh"
 
+using namespace std;
 int main()
 {
-	TransportProblem newProblem(5, 5, 100, 10);
+	TransportProblem newProblem(5, 4, 100, 10);
+	
 	newProblem.showOperationTable();
 	newProblem.showTransportCostTable();
-	newProblem.showWorkers();
-
-	newProblem.upLeftCorner();
+	newProblem.minimalElement();
 	newProblem.showOperationTable();
-	newProblem.showTransportCostTable();
+	newProblem.showPotencials();
+	//while the problem is degenerated
+	while (!newProblem.degenerateSolution())
+	{
+		newProblem.ePerturbation();
+		newProblem.minimalElement();
+	}
+	newProblem.checkPotencials();
 	newProblem.showWorkers();
-	system("pause");
-
+	newProblem.showPotencials();
+	cin.get();
 }

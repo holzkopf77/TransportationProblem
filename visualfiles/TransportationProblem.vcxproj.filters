@@ -15,16 +15,16 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\inc\demander.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\inc\supplier.h">
+    <ClInclude Include="..\inc\demander.hh">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\inc\iTransportProblem.hh">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\inc\TransportProblem.h">
+    <ClInclude Include="..\inc\supplier.hh">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\inc\TransportProblem.hh">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -32,13 +32,13 @@
     <ClCompile Include="..\src\demander.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\src\main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\src\supplier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\src\TransportProblem.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="..\src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

@@ -11,10 +11,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\inc\demander.h" />
+    <ClInclude Include="..\inc\demander.hh" />
     <ClInclude Include="..\inc\iTransportProblem.hh" />
-    <ClInclude Include="..\inc\supplier.h" />
-    <ClInclude Include="..\inc\TransportProblem.h" />
+    <ClInclude Include="..\inc\supplier.hh" />
+    <ClInclude Include="..\inc\TransportProblem.hh" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\src\demander.cpp" />
