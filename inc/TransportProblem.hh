@@ -9,6 +9,7 @@
 #include "demander.hh"
 #include "supplier.hh"
 
+
 /*!
   \class TransportProblem
   \brief Main class for describing the transport problem.
@@ -27,6 +28,7 @@ private:
   std::vector<Supplier> listOfSuppliers;
   int** transportCostTable;
   int** operationTable;
+  int tabTestowa[5][4];
   std::vector<int> potencialsV;
   std::vector<int> potencialsU;
  //  int minimalRow(int j);
@@ -42,6 +44,8 @@ public:
   //displaying
   void showTransportCostTable();
   void showOperationTable();
+  void showOperationTableTest();
+  void showTransportCostTableTest();
   void showPotencials();
   void showWorkers();
 };

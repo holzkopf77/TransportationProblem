@@ -3,9 +3,80 @@
 
 TransportProblem::TransportProblem()
 {
-	numberOfDemanders = 0;
-	numberOfSuppliers = 0;
+		//balanced case of transportation problem
+		int totalSupply = 100;
 
+		numberOfDemanders = 5;
+		numberOfSuppliers =4;
+
+		std::vector<int>demandsToAssing{ 10, 15, 30, 10, 35 };
+		std::vector<int>suppliesToAssing{ 20, 30, 10, 40 };
+
+		//create all demanders
+		for (int i = 0; i < numberOfDemanders; i++)
+		{
+			Demander newDemander(demandsToAssing[i]);
+			listOfDemanders.push_back(newDemander);
+		}
+
+		//create all suppliers
+		for (int i = 0; i < numberOfSuppliers; i++)
+		{
+			Supplier newSupply(suppliesToAssing[i]);
+			listOfSuppliers.push_back(newSupply);
+		}
+
+		//memory allocation for cost table
+		transportCostTable = new int*[numberOfDemanders];
+		for (int i = 0; i < numberOfDemanders; i++)
+		{
+			transportCostTable[i] = new int[numberOfSuppliers];
+		}
+
+		transportCostTable[0][0] = 5;
+		transportCostTable[0][1] = 2;
+		transportCostTable[0][2] = 1;
+		transportCostTable[0][3] = 5;
+	
+		transportCostTable[1][0] = 3;
+		transportCostTable[1][1] = 1;
+		transportCostTable[1][2] = 1;
+		transportCostTable[1][3] = 4;
+
+		transportCostTable[2][0] = 1;
+		transportCostTable[2][1] = 1;
+		transportCostTable[2][2] = 2;
+		transportCostTable[2][3] = 3;
+
+		transportCostTable[3][0] = 2;
+		transportCostTable[3][1] = 1;
+		transportCostTable[3][2] = 5;
+		transportCostTable[3][3] = 1;
+
+		transportCostTable[4][0] = 2;
+		transportCostTable[4][1] = 1;
+		transportCostTable[4][2] = 2;
+		transportCostTable[4][3] = 6;
+
+		//memory allocation for operation table
+		operationTable = new int*[numberOfSuppliers];
+		for (int i = 0; i < numberOfSuppliers; i++)
+		{
+			operationTable[i] = new int[numberOfDemanders];
+		}
+
+		//init 0 for all operations inside operation table
+		for (int i = 0; i < numberOfSuppliers; i++)
+		{
+			for (int j = 0; j < numberOfDemanders; j++)
+			{
+				operationTable[i][j] = 0;
+			}
+		}
+		int T[5][4] {{0, 0, 10, 0},{ 0, 15, 0, 0 },{ 20, 10, 0, 0 },{ 0, 5, 0, 5 },{ 0, 0, 0, 35 }};
+		for (int i = 0; i < 5;i++)
+			for (int j = 0; j < 4; j++)
+				tabTestowa[i][j] = T[i][j];
 }
 
 
@@ -155,24 +226,24 @@ int TransportProblem::returnNumberOfSuppliers()
 }
 
 
-void TransportProblem::showTransportCostTable()
+void TransportProblem::showTransportCostTableTest()
 {
-	std::cout << "Transport costs table:" << std::endl;
-	for (int i = 0; i < numberOfSuppliers; i++)
+	std::cout << "<------------------------Tabela kosztow----------------------->" << std::endl;
+	for (int i = 0; i < numberOfDemanders; i++)
 	{
-		for (int j = 0; j < numberOfDemanders; j++)
+		for (int j = 0; j < numberOfSuppliers; j++)
 		{
 			std::cout << transportCostTable[i][j] << " ";
 		}
 		std::cout << std::endl;
 	}
-
+	std::cout << std::endl;
 }
 
 
 void TransportProblem::showOperationTable()
 {
-	std::cout << "Operation table:" << std::endl;
+	std::cout << "<------------------------Tabela operacji--------------------->" << std::endl;
 	for (int i = 0; i < numberOfSuppliers; i++)
 	{
 		for (int j = 0; j < numberOfDemanders; j++)
@@ -181,6 +252,7 @@ void TransportProblem::showOperationTable()
 		}
 		std::cout << std::endl;
 	}
+	std::cout << std::endl;
 }
 
 void TransportProblem::showPotencials()
@@ -193,13 +265,30 @@ void TransportProblem::showPotencials()
 		std::cout << U << std::endl;
 }
 
-
+void TransportProblem::showTransportCostTable()
+{
+	std::cout << "<------------------------Tabela kosztow---------------------->" << std::endl;
+	for (int i = 0; i < numberOfSuppliers; i++)
+	{
+		for (int j = 0; j < numberOfDemanders; j++)
+		{
+			std::cout << transportCostTable[i][j] << " ";
+		}
+		std::cout << std::endl;
+	}
+	std::cout << std::endl;
+}
 void TransportProblem::showWorkers()
 {
 	//show all demanders
+	std::cout << "SPIS ODBIORCOW" << std::endl;
+	std::cout << std::endl;
 	for (auto i : listOfDemanders)
 		i.showDemander();
 	//show all suppliers
+	std::cout << std::endl;
+	std::cout << "SPIS MAGAZYNOW" << std::endl;
+	std::cout << std::endl;
 	for (auto i : listOfSuppliers)
 		i.showSupplier();
 }
@@ -292,6 +381,19 @@ int TransportProblem::minimalElementInMatrix(int **tab)
 	 //for the last supplier add small number eta * number of demanders
 	 listOfSuppliers[i].changeInitSupply(000000001 * returnNumberOfDemanders());
  }
+ void TransportProblem::showOperationTableTest()
+ {
+	 std::cout << "<------------------------Tabela operacji--------------------->" << std::endl;
+	 for (int i = 0; i <numberOfDemanders; i++)
+	 {
+		 for (int j = 0; j < numberOfSuppliers; j++)
+		 {
+			 std::cout << tabTestowa[i][j] << " ";
+		 }
+		 std::cout << std::endl;
+	 }
+	 std::cout << std::endl;
+ }
 
  bool TransportProblem::checkPotencials()
  {
@@ -316,7 +418,6 @@ int TransportProblem::minimalElementInMatrix(int **tab)
 				 tempPotencialsTable[i][j] = transportCostTable[i][j];
 		 }
 	 }
-
 	 //find potencials
 	 // check signs
 

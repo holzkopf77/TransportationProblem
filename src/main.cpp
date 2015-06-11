@@ -3,24 +3,26 @@
 #include "supplier.hh"
 #include "TransportProblem.hh"
 
-using namespace std;
 int main()
 {
-	TransportProblem newProblem(5, 4, 100, 10);
-	
+	std::cout << "   Projektowanie Algorytmow i Metod Sztucznej Inteligencji    " << std::endl;
+	std::cout << "<--------------------PROBLEM TRANSPORTOWY-------------------->" << std::endl;
+	std::cout << std::endl;
+	std::cout << "         Autorzy: Filip Chodorowski, Daniel Budynski          " << std::endl;
+	std::cout << std::endl;
+	std::cout << std::endl;
+
+	//demanders,suppliers,total demand, range of costs
+	//TransportProblem newProblem(6, 6, 1500, 5);
+	TransportProblem newProblem;
+	std::cout << "<--------------------Sytuacja poczatkowa--------------------->" << std::endl;
+	std::cout << std::endl;
 	newProblem.showOperationTable();
-	newProblem.showTransportCostTable();
+	newProblem.showTransportCostTableTest();
 	newProblem.minimalElement();
-	newProblem.showOperationTable();
-	newProblem.showPotencials();
-	//while the problem is degenerated
-	while (!newProblem.degenerateSolution())
-	{
-		newProblem.ePerturbation();
-		newProblem.minimalElement();
-	}
-	newProblem.checkPotencials();
+	std::cout << "<-----------------------Sytuacja koncowa--------------------->" << std::endl;
+	std::cout << std::endl;
+	newProblem.showOperationTableTest();
 	newProblem.showWorkers();
-	newProblem.showPotencials();
-	cin.get();
+	std::cin.get();
 }

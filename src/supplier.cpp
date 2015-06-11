@@ -56,5 +56,5 @@ bool Supplier::changeInitSupply(long double subValue)
 
 void Supplier::showSupplier()
 {
-	std::cout << "Supplier, init supply: " << returnInitSupply() << " current supply: " << returnCurrentSupply() << std::endl;
+	std::cout << "Magazyn, poczatkowa ilosc towaru: " << returnInitSupply() << " aktualna ilosc towaru: " << returnCurrentSupply() << std::endl;
 }

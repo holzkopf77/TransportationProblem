@@ -56,5 +56,5 @@ bool Demander::changeInitDemand(long double subValue)
 
 void Demander::showDemander()
 {
-	std::cout << "Demander, init demand: " << returnInitDemand() << " current demand: " << returnCurrentDemand() << std::endl;
+	std::cout << "Odbiorca, poczatkowe zapotrzebowanie: " << returnInitDemand() << " aktualne zapotrzebowanie: " << returnCurrentDemand() << std::endl;
 }
